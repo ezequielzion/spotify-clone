@@ -1,20 +1,13 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
-import { NextApiRequest } from "next";
 
-interface Request extends NextApiRequest {
-  nextUrl: {
-    pathname: string;
-  };
-}
-
-export const middleware = async (req: Request) => {
+export const middleware = async (req) => {
   //Token will exist if user is logged in
   console.log("Here's the req", req.headers);
 
   const token = await getToken({
     req,
-    secret: process.env.JWT_SECRET ?? "",
+    secret: process.env.JWT_SECRET,
   });
 
   console.log("Here's the token", token);
