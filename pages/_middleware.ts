@@ -17,7 +17,6 @@ export const middleware = async (req: any) => {
     secret: process.env.JWT_SECRET ?? "",
   });
 
-  alert(`Here's the token, ${token}`);
   console.log("Here's the token", token);
 
   const { pathname } = req.nextUrl;
