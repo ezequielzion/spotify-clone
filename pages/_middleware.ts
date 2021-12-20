@@ -8,7 +8,7 @@ interface Request extends NextApiRequest {
   };
 }
 
-export const middleware = async (req: Request) => {
+export const middleware = async (req: any) => {
   //Token will exist if user is logged in
   console.log("Here's the req", req);
 
