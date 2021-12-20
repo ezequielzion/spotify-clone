@@ -14,7 +14,7 @@ export const middleware = async (req: NextApiRequestExt) => {
 
   const token = await getToken({
     req,
-    secret: process.env.JWT_SECRET ?? "",
+    secret: process.env.JWT_SECRET?.toString() ?? "",
   });
 
   console.log("Here's the token", token);
