@@ -16,7 +16,7 @@ export const middleware = async (req: Request) => {
 
   const token = await getToken({
     req,
-    secret: process.env.JWT_SECRET!,
+    secret: process.env.JWT_SECRET ?? "some_super_secret_value",
   });
 
   console.log("Here's the token", token);
