@@ -24,6 +24,8 @@ export const middleware = async (req: NextApiRequestExt) => {
   //1: It's a request for next-auth session & provider fetching
   //2: the token exists
   if (pathname.includes("/api/auth") || token) {
+    console.log("entraste acá flaco");
+
     return NextResponse.next();
   }
 
