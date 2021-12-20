@@ -15,6 +15,8 @@ export const middleware = async (req: Request) => {
     secret: process.env.JWT_SECRET!,
   });
 
+  console.log("Here's the token", token);
+
   const { pathname } = req.nextUrl;
   //Allow the request if
   //1: It's a request for next-auth session & provider fetching
