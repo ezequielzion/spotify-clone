@@ -11,8 +11,6 @@ interface Request extends NextApiRequest {
 export const middleware = async (req: Request) => {
   //Token will exist if user is logged in
   console.log("Here's the req", req);
-  console.log("Here's the secret", process.env.JWT_SECRET);
-  console.log("Here's the secret", process.env.JWT_SECRET);
 
   const token = await getToken({
     req,
