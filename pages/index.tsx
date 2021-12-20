@@ -19,7 +19,6 @@ const Home: NextPage = () => {
   );
   const [topSongs, setTopSongs] = useState<SpotifyApi.TrackObjectFull[]>([]);
   const [currentTrackId, setCurrentTrackId] = useState("");
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [songInfo, setSongInfo] = useState<SpotifyApi.TrackObjectFull>();
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const Home: NextPage = () => {
 
   const playSong = async (song: SpotifyApi.TrackObjectFull) => {
     setCurrentTrackId(song.id);
-    setIsPlaying(true);
   };
 
   useEffect(() => {
@@ -62,10 +60,6 @@ const Home: NextPage = () => {
         if (data.body?.item?.id) {
           setCurrentTrackId(data.body?.item?.id);
         }
-
-        spotifyApi.getMyCurrentPlaybackState().then((data) => {
-          setIsPlaying(data.body?.is_playing);
-        });
       });
     }
   };
