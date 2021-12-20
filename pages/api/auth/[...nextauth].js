@@ -1,4 +1,3 @@
-import nextAuth from "next-auth";
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import spotifyApi, { LOGIN_URL } from "../../../utils/spotify";
