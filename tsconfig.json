@@ -21,7 +21,7 @@
     "**/*.tsx",
     "pages/login.js",
     "hooks/useSpotify.js",
-    "pages/_middleware.js"
+    "pages/_middleware.ts"
   ],
   "exclude": ["node_modules"]
 }

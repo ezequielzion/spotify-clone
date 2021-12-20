@@ -1,13 +1,13 @@
 import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
-export const middleware = async (req) => {
+export const middleware = async (req: any) => {
   //Token will exist if user is logged in
   console.log("Here's the req", req.headers);
 
   const token = await getToken({
     req,
-    secret: process.env.JWT_SECRET,
+    secret: process.env.JWT_SECRET ?? "",
   });
 
   console.log("Here's the token", token);
