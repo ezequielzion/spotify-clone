@@ -10,7 +10,7 @@ interface NextApiRequestExt extends NextApiRequest {
 
 export const middleware = async (req: NextApiRequestExt) => {
   //Token will exist if user is logged in
-  console.log("Here's the req", req.headers);
+  console.log("Here's the req", req);
 
   const token = await getToken({
     req,
@@ -24,13 +24,15 @@ export const middleware = async (req: NextApiRequestExt) => {
   //1: It's a request for next-auth session & provider fetching
   //2: the token exists
   if (pathname.includes("/api/auth") || token) {
-    console.log("entraste acá flaco");
-
+    console.log(
+      "Middleware: pathname includes /api/auth and/or there is a token"
+    );
     return NextResponse.next();
   }
 
   //Redirect them to login if they don't have token AND are requesting a protected route
   if (!token && pathname !== "/login") {
+    console.log("Middleware: there is no token and pathname !== /login");
     return NextResponse.redirect("/login");
   }
 };
