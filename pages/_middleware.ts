@@ -2,6 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
 interface NextApiRequestExt extends NextApiRequest {
   nextUrl: {
@@ -9,7 +10,7 @@ interface NextApiRequestExt extends NextApiRequest {
   };
 }
 
-export const middleware = async (req: any) => {
+export async function middleware(req: any) {
   //Token will exist if user is logged in
   const session = await getSession({ req });
 
@@ -39,4 +40,4 @@ export const middleware = async (req: any) => {
     console.log("Middleware: there is no token and pathname !== /login");
     return NextResponse.redirect("/login");
   }
-};
+}
