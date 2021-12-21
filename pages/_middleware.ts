@@ -2,7 +2,6 @@ import { getToken } from "next-auth/jwt";
 import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { NextApiRequest } from "next";
-import { NextRequest } from "next/server";
 
 interface NextApiRequestExt extends NextApiRequest {
   nextUrl: {
@@ -19,12 +18,14 @@ export async function middleware(req: any) {
     secret: process.env.JWT_SECRET ?? "",
   });
 
+  const { pathname } = req.nextUrl;
+
   console.log("Here's the req", req);
   console.log("Here's the session", session);
   console.log("Here's the jwt", process.env.JWT_SECRET);
   console.log("Here's the token", token);
+  console.log("Here's the pathname", pathname);
 
-  const { pathname } = req.nextUrl;
   //Allow the request if
   //1: It's a request for next-auth session & provider fetching
   //2: the token exists
