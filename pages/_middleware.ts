@@ -18,6 +18,7 @@ export const middleware = async (req: NextApiRequestExt) => {
   });
 
   console.log("Here's the jwt", process.env.JWT_SECRET);
+  console.log("Here's the token", token);
 
   const { pathname } = req.nextUrl;
   //Allow the request if
