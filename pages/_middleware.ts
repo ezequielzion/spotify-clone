@@ -14,8 +14,7 @@ export const middleware = async (req: NextApiRequestExt) => {
 
   const token = await getToken({
     req,
-    secret:
-      "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY0MDAxMjI0NCwiaWF0IjoxNjQwMDEyMjQ0fQ.vaPFVpX3OKmtIyRnGEUuqPEfm5dTRJDyskQSX5ejbII" /* process.env.JWT_SECRET ?? "" */,
+    secret: process.env.JWT_SECRET ?? "",
   });
 
   console.log("Here's the jwt", process.env.JWT_SECRET);
