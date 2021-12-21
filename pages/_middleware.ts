@@ -34,6 +34,7 @@ export async function middleware(req: any) {
     console.log(
       "Middleware: pathname includes /api/auth and/or there is a token"
     );
+    console.log("lo siguiente es el NextResponse.next()", NextResponse.next());
     return NextResponse.next();
   }
 
