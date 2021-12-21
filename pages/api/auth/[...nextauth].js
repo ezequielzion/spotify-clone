@@ -35,6 +35,7 @@ export default NextAuth({
       authorization: LOGIN_URL,
     }),
   ],
+  logger: error(code, metadata),
   secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/login",
