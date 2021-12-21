@@ -9,7 +9,7 @@ interface NextApiRequestExt extends NextApiRequest {
   };
 }
 
-export const middleware = async (req: NextApiRequestExt) => {
+export const middleware = async (req: any) => {
   //Token will exist if user is logged in
   const session = await getSession({ req });
 
