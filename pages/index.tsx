@@ -124,6 +124,8 @@ const Home: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
+  console.log("This is the session given from getSession", session);
+
   return {
     props: {
       session,
