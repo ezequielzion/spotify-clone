@@ -41,6 +41,10 @@ export default NextAuth({
   },
   callbacks: {
     async jwt({ token, account, user }) {
+      console.log("We are at async jwt, here are some parameters");
+      console.log("async jwt token", token);
+      console.log("async jwt account", account);
+      console.log("async jwt user", user);
       //Initial sign in
       if (account && user) {
         return {
