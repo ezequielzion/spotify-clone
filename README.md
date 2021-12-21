@@ -1,5 +1,3 @@
-# Desafío técnico
-
 ## Desarrollar una aplicación simple de dos pantallas:
 
 - Pantalla de login
