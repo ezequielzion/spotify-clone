@@ -21,6 +21,7 @@ export async function middleware(req: any) {
   const { pathname } = req.nextUrl;
 
   console.log("Here's the req", req);
+  console.log("Here's the json req", JSON.stringify(req));
   console.log("Here's the session", session);
   console.log("Here's the jwt", process.env.JWT_SECRET);
   console.log("Here's the token", token);
