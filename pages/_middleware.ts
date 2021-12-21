@@ -14,7 +14,7 @@ export const middleware = async (req: NextApiRequestExt) => {
 
   const token = await getToken({
     req,
-    secret: process.env.JWT_SECRET?.toString() ?? "",
+    secret: process.env.JWT_SECRET ?? "",
   });
 
   console.log("Here's the token", token);
@@ -30,7 +30,7 @@ export const middleware = async (req: NextApiRequestExt) => {
   }
 
   //Redirect them to login if they don't have token AND are requesting a protected route
-  if (!token && pathname !== "/login") {
+  /* if (!token && pathname !== "/login") {
     return NextResponse.redirect("/login");
-  }
+  } */
 };
