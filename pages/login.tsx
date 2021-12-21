@@ -25,7 +25,7 @@ const Login: NextPage = ({ providers }: any) => {
             <button
               key={provider.name}
               className={`${styles.login} ${styles.button}`}
-              onClick={() => signIn(provider.id, { callbackUrl: "/" })}
+              onClick={() => signIn("spotify", { callbackUrl: "/" })}
             >
               Login with {provider.name}
             </button>
