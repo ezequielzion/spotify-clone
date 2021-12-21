@@ -1,4 +1,5 @@
 import { getToken } from "next-auth/jwt";
+import { getSession } from "next-auth/react";
 import { NextResponse } from "next/server";
 import { NextApiRequest } from "next";
 
@@ -10,13 +11,15 @@ interface NextApiRequestExt extends NextApiRequest {
 
 export const middleware = async (req: NextApiRequestExt) => {
   //Token will exist if user is logged in
-  console.log("Here's the req", req);
+  const session = await getSession({ req });
 
   const token = await getToken({
     req,
     secret: process.env.JWT_SECRET ?? "",
   });
 
+  console.log("Here's the req", req);
+  console.log("Here's the session", session);
   console.log("Here's the jwt", process.env.JWT_SECRET);
   console.log("Here's the token", token);
 
