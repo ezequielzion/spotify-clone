@@ -91,42 +91,46 @@ const Home: NextPage = () => {
           rel="stylesheet"
         />
       </Head>
-      <main className={styles.main}>
-        <button
-          className={`${styles.signOut} ${styles.button}`}
-          onClick={() => signOut({ callbackUrl: "/login" })}
-        >
-          Sign out
-        </button>
-        <section className={styles.welcome}>
-          Welcome, {session?.user?.name ?? "friend"}
-        </section>
-        <section className={styles.content}>
-          <TopArtists topArtists={topArtists} />
-          <TopSongs
-            topSongs={topSongs}
-            onPlaySong={playSong}
-            currentSong={songInfo}
-          />
-        </section>
-      </main>
-      {songInfo && (
-        <div className={styles.spotifyPlayer}>
-          <SpotifyPlayer
-            initialVolume={50}
-            autoPlay={true}
-            token={accessToken}
-            uris={songInfo?.uri}
-            styles={{
-              color: "#fff",
-              trackNameColor: "#fff",
-              trackArtistColor: "#ececec",
-              bgColor: "hsl(0, 0%, 10%)",
-              height: "5em",
-            }}
-          />
-        </div>
-      )}
+      {session?.user ? (
+        <>
+          <main className={styles.main}>
+            <button
+              className={`${styles.signOut} ${styles.button}`}
+              onClick={() => signOut({ callbackUrl: "/login" })}
+            >
+              Sign out
+            </button>
+            <section className={styles.welcome}>
+              Welcome, {session?.user?.name ?? "friend"}
+            </section>
+            <section className={styles.content}>
+              <TopArtists topArtists={topArtists} />
+              <TopSongs
+                topSongs={topSongs}
+                onPlaySong={playSong}
+                currentSong={songInfo}
+              />
+            </section>
+          </main>
+          {songInfo && (
+            <div className={styles.spotifyPlayer}>
+              <SpotifyPlayer
+                initialVolume={50}
+                autoPlay={true}
+                token={accessToken}
+                uris={songInfo?.uri}
+                styles={{
+                  color: "#fff",
+                  trackNameColor: "#fff",
+                  trackArtistColor: "#ececec",
+                  bgColor: "hsl(0, 0%, 10%)",
+                  height: "5em",
+                }}
+              />
+            </div>
+          )}
+        </>
+      ) : null}
     </div>
   );
 };
