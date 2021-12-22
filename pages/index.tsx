@@ -1,18 +1,22 @@
 import type { NextPage, GetServerSideProps } from "next";
 import { getSession, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
+import Link from "next/link";
 
 import SpotifyPlayer from "react-spotify-web-playback";
 import useSpotify from "../hooks/useSpotify";
 
 import TopArtists from "../components/TopArtists";
-import styles from "../styles/Home.module.css";
 import TopSongs from "../components/TopSongs";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   const spotifyApi = useSpotify();
-  const { data: session, status } = useSession();
+  const router = useRouter();
+  const { data: session } = useSession();
+  const accessToken: string = spotifyApi.getAccessToken()!;
 
   const [topArtists, setTopArtists] = useState<SpotifyApi.ArtistObjectFull[]>(
     []
@@ -20,6 +24,13 @@ const Home: NextPage = () => {
   const [topSongs, setTopSongs] = useState<SpotifyApi.TrackObjectFull[]>([]);
   const [currentTrackId, setCurrentTrackId] = useState("");
   const [songInfo, setSongInfo] = useState<SpotifyApi.TrackObjectFull>();
+
+  //If the user hasn't logged in yet, they can't see home view
+  useEffect(() => {
+    if (!session?.user) {
+      router.push("/login");
+    }
+  }, []);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -33,9 +44,11 @@ const Home: NextPage = () => {
     }
   }, [session, spotifyApi]);
 
-  const playSong = async (song: SpotifyApi.TrackObjectFull) => {
-    setCurrentTrackId(song.id);
-  };
+  useEffect(() => {
+    if (spotifyApi.getAccessToken() && !currentTrackId) {
+      fetchCurrentSong();
+    }
+  }, [currentTrackId, spotifyApi, session]);
 
   useEffect(() => {
     const fetchSongInfo = async () => {
@@ -64,13 +77,9 @@ const Home: NextPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (spotifyApi.getAccessToken() && !currentTrackId) {
-      fetchCurrentSong();
-    }
-  }, [currentTrackId, spotifyApi, session]);
-
-  const accessToken: string = spotifyApi.getAccessToken()!;
+  const playSong = async (song: SpotifyApi.TrackObjectFull) => {
+    setCurrentTrackId(song.id);
+  };
 
   return (
     <div className={styles.container}>
@@ -85,7 +94,7 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <button
           className={`${styles.signOut} ${styles.button}`}
-          onClick={() => signOut()}
+          onClick={() => signOut({ callbackUrl: "/login" })}
         >
           Sign out
         </button>
@@ -124,8 +133,6 @@ const Home: NextPage = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
-  console.log("This is the session given from getSession", session);
-
   return {
     props: {
       session,
