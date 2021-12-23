@@ -1,7 +1,8 @@
 # How to run
 1. Download the project and open a terminal on the source folder
 2. Run `nvm use 16.13`. You need to have `node version manager` installed.
-3. Create a `.env.local` file in the base directory of the project and paste the following code:
+3. Run `npm i` to install dependencies
+4. Create a `.env.local` file in the base directory of the project and paste the following code:
 ```
 NEXTAUTH_URL=http://localhost:3000
 
@@ -11,7 +12,7 @@ NEXT_PUBLIC_CLIENT_SECRET=378d70b971fd412e826aad6de40b744a
 
 JWT_SECRET=eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY0MDAxMjI0NCwiaWF0IjoxNjQwMDEyMjQ0fQ.vaPFVpX3OKmtIyRnGEUuqPEfm5dTRJDyskQSX5ejbII
 ```
-4. Run the project using `npm run dev`. Make sure to be using port 3000, otherwise it will throw an invalid uri error
+5. Run the project using `npm run dev`. Make sure to be using port 3000, otherwise it will throw an invalid uri error
 
 # What's the task?
 ## Develop a simple two-screen application:
